@@ -6,7 +6,12 @@ python -m venv venv
 . venv/Scripts/activate
 pip install -r requirements.txt
 ```
+https://console.cloud.google.com/projectselector2/home/dashboard
 
+Создаём проект
+Подключаем API:
+Создаём сервисный аккаунт(адрес вашего личного аккаунта в поле Service account admins role)
+Получаем JSON-файл с ключом доступа к сервисному аккаунту
 
 в таблице
 файл
