@@ -8,13 +8,10 @@ from google.oauth2.service_account import Credentials
 from googleapiclient.errors import HttpError
 import pandas as pd
 
-import settings
-
-
 SCOPES = [
     'https://www.googleapis.com/auth/spreadsheets.readonly',
     'https://www.googleapis.com/auth/calendar.events',
-    # 'https://www.googleapis.com/auth/drive'
+    'https://www.googleapis.com/auth/drive'
 ]
 
 
@@ -48,12 +45,13 @@ def parse_events(df):
     events = []
     df.columns = df.iloc[0]
     for _, row in df.iterrows():
-        name = row[settings.name]
-        if not name or name == 'название':
+        name = row['название']
+        if not row['название'] or name == 'название':
             continue
-        date_str = row[settings.date].replace(".", "-")
-        start_time = row[settings.start_time]
-        end_time = row[settings.end_time]
+        date_str = row['дата'].replace(".", "-")
+        # date_format(date_str)
+        start_time = row['начало']
+        end_time = row['конец']
         if all([name, date_str, start_time]):
             events.append([name, date_str, start_time, end_time])
     return events
