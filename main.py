@@ -8,10 +8,13 @@ from google.oauth2.service_account import Credentials
 from googleapiclient.errors import HttpError
 import pandas as pd
 
+import settings
+
+
 SCOPES = [
     'https://www.googleapis.com/auth/spreadsheets.readonly',
     'https://www.googleapis.com/auth/calendar.events',
-    'https://www.googleapis.com/auth/drive'
+    # 'https://www.googleapis.com/auth/drive'
 ]
 
 
@@ -19,7 +22,7 @@ SCOPES = [
 SPREED_SHEETS_ID = '1_q_nfruEGkjPxhL53uwuLGM7YIZlHlGvp-KJ3yALBkQ'
 CALENDAR_ID = '8b472d96c37bc493132343832aeb43f5345b5a7d2f282bf36d0e2631d5374d99@group.calendar.google.com'
 
-CREDENTIALS_FILE = 'peak-comfort-453316-c7-4220ec846c7e.json'
+CREDENTIALS_FILE = 'keys.json'
 CREDENTIALS = Credentials.from_service_account_file(filename=CREDENTIALS_FILE, scopes=SCOPES)
 
 sheets_service = discovery.build('sheets', 'v4', credentials=CREDENTIALS)
@@ -45,14 +48,13 @@ def parse_events(df):
     events = []
     df.columns = df.iloc[0]
     for _, row in df.iterrows():
-        name = row['название']
-        if not row['название'] or name == 'название':
+        name = row[settings.name]
+        if not name or name == 'название':
             continue
-        date_str = row['дата'].replace(".", "-")
-        # date_format(date_str)
-        start_time = row['начало']
-        end_time = row['конец']
-        if all(name, date_str, start_time):
+        date_str = row[settings.date].replace(".", "-")
+        start_time = row[settings.start_time]
+        end_time = row[settings.end_time]
+        if all([name, date_str, start_time]):
             events.append([name, date_str, start_time, end_time])
     return events
 
