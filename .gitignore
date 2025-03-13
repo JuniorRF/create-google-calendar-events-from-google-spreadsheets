@@ -1,6 +1,7 @@
-/venv
+venv/
 venv
 credentials.json
 .env
 peak-comfort-453316-c7-4220ec846c7e.json
 *.json
+__pycache__/
