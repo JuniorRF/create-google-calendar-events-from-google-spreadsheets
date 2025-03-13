@@ -98,8 +98,8 @@ def create_calendar_event(
         print(f"Событие '{summary}' создано: {link}")
         return link
     
-    except HttpError as error:
-        print(f"Ошибка Google API: {error}")
+    except HttpError as e:
+        print(f"Ошибка Google API: {e}")
     except ValueError as e:
         print(f"Неверный формат даты/времени: {e}")
 
@@ -143,14 +143,18 @@ if __name__ == "__main__":
         print(e)
         exit('нет нужного столбца или имя не совпадает')
 
-    letter_link =string.ascii_uppercase[15]
+    letter_link =string.ascii_uppercase[LINK_COL]
 
     while True:
-        data = read_google_sheet()
-        new_events = parse_events(data)
-        for event in new_events:
-            name, address, telephone, date, start, end = event[1], event[2],event[3], event[4], event[5], event[6]
-            link = create_calendar_event(name, address, telephone, date, start, end)
-            if link:
-                update_cell(event[0], link)
-        time.sleep(60)
+        try:
+            data = read_google_sheet()
+            new_events = parse_events(data)
+            for event in new_events:
+                name, address, telephone, date, start, end = event[1], event[2],event[3], event[4], event[5], event[6]
+                link = create_calendar_event(name, address, telephone, date, start, end)
+                if link:
+                    update_cell(event[0], link)
+        except Exception as e:
+            print(f'Ошибка {e}')
+        finally:
+            time.sleep(60)
