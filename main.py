@@ -14,11 +14,6 @@ SCOPES = [
     'https://www.googleapis.com/auth/calendar.events',
 ]
 
-
-
-
-# CALENDAR_ID = '8b472d96c37bc493132343832aeb43f5345b5a7d2f282bf36d0e2631d5374d99@group.calendar.google.com'
-
 CREDENTIALS_FILE = 'keys.json'
 CREDENTIALS = Credentials.from_service_account_file(filename=CREDENTIALS_FILE, scopes=SCOPES)
 
@@ -55,21 +50,9 @@ def parse_events(data):
 
         date = row[settings.DATE]
         if date:
-        #     try:
-        #         datetime.strptime(date, '%d-%m-%Y')
-        #     except ValueError as e:
-        #         print('Дата не соответствует', date, '-', e)
-        #         continue
             date = date.replace(".", "-")
 
         start = row[settings.START_TIME]
-        # if start:
-        #     try:
-        #         datetime.strptime(start, '%H:%M"')
-        #     except ValueError as e:
-        #         print('Время начала не соответствует', start, '-', e)
-        #         continue
-
         end = row[settings.END_TIME]
         if not all([name, address, telephone, date, start, end]):
             continue
@@ -158,7 +141,7 @@ if __name__ == "__main__":
 
     except ValueError as e:
         print(e)
-        exit()
+        exit('нет нужного столбца или имя не совпадает')
 
     letter_link =string.ascii_uppercase[15]
 
@@ -168,5 +151,6 @@ if __name__ == "__main__":
         for event in new_events:
             name, address, telephone, date, start, end = event[1], event[2],event[3], event[4], event[5], event[6]
             link = create_calendar_event(name, address, telephone, date, start, end)
-            update_cell(event[0], link)
-        time.sleep(20)
+            if link:
+                update_cell(event[0], link)
+        time.sleep(60)
