@@ -36,4 +36,4 @@ https://console.cloud.google.com/projectselector2/home/dashboard
 
 ### Запуск программы из cmd  
 #### перейти в папку с программой 
-#### `python main.py`
+### `python main.py`

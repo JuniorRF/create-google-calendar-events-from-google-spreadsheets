@@ -1,8 +1,8 @@
 # ID листа
-SPREED_SHEETS_ID = '1_q_nfruEGkjPxhL53uwuLGM7YIZlHlGvp-KJ3yALBkQ'
+SPREED_SHEETS_ID = ''
 
 # ID календаря
-CALENDAR_ID = 'demchakromka@gmail.com' #'8b472d96c37bc493132343832aeb43f5345b5a7d2f282bf36d0e2631d5374d99@group.calendar.google.com'
+CALENDAR_ID = ''
 
 # имя листа
 NAME_LIST = 'Лист1'
