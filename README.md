@@ -1,7 +1,7 @@
 # create-google-calendar-events-from-google-spreadsheets
-Программа собирает информацию из таблиц Google  
-\> создает меропритие в календаре Goоgle  
-\> вставляет ссылку на событие в календарь
+### Программа собирает информацию из таблиц Google  
+### \> создает меропритие в календаре Goоgle  
+### \> вставляет ссылку на событие в календарь
 
 Python 3.10.9
 ```
@@ -34,4 +34,8 @@ https://console.cloud.google.com/projectselector2/home/dashboard
 * \>\> Интеграция календаря
 * \>\>\> Идентификатор календаря указать в `settings.py` `CALENDAR_ID` 
 * основной календарь собственная почта 
-* иные 8b472d96c37bc493132f374d99@group.calendar.google.com 
+* иные 8b472d96c37bc493132f374d99@group.calendar.google.com  
+
+### Запуск программы из cmd  
+#### перейти в папку с программой 
+#### `python main.py`
